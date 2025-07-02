@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.cicdtest.pom.Test.AddProductTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-07-02T23:44:02" hostname="DESKTOP-TRUVAAP" time="90.959">
+  <properties/>
+  <testcase name="testAddProductSuccessfully" classname="com.cicdtest.pom.Test.AddProductTest" time="90.959"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
