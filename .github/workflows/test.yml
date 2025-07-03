@@ -1,10 +1,7 @@
 name: Run Playwright Java Tests with Extent Report
 
 on:
-  push:
-    branches:
-      - master
-  pull_request:
+  workflow_dispatch:  # This enables manual "Run workflow" button only
 
 jobs:
   build:
@@ -38,4 +35,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: extent-report
-          path: target/test-logs/extent-report.html  # 🔁 Replace this with actual Extent report path
+          path: target/test-logs/extent-report.html
