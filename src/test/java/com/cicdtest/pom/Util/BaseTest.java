@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 public class BaseTest {
     protected Playwright playwright;
@@ -27,9 +28,13 @@ public class BaseTest {
     public void setUp(Method method) {
         playwright = Playwright.create();
 
-        // Launch browser in headed mode
         browser = playwright.chromium().launch(
-                new BrowserType.LaunchOptions().setHeadless(false)
+                new BrowserType.LaunchOptions()
+                        .setHeadless(true)
+                        .setArgs(Arrays.asList(new String[]{
+                                "--no-sandbox",
+                                "--disable-dev-shm-usage"
+                        }))
         );
 
         // Set screen size to 1920x1080 when creating context
