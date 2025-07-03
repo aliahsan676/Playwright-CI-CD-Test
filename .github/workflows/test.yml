@@ -1,7 +1,7 @@
 name: Run Playwright Java Tests with Extent Report
 
 on:
-  workflow_dispatch:  # This enables manual "Run workflow" button only
+  workflow_dispatch:
 
 jobs:
   build:
@@ -27,12 +27,15 @@ jobs:
           npm install -g playwright
           playwright install
 
-      - name: Run Tests with Maven
-        run: mvn clean test
+      - name: Give permission to gradlew
+        run: chmod +x ./gradlew
+
+      - name: Run Tests with Gradle
+        run: ./gradlew clean test
 
       - name: Upload Extent Report
-        if: always()  # Upload even if tests fail
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: extent-report
-          path: target/test-logs/extent-report.html
+          path: target/test-logs/extent-report.html  # Update if your report path is different
