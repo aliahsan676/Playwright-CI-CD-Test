@@ -2,6 +2,15 @@ name: Run Playwright Java Tests with Extent Report
 
 on:
   workflow_dispatch:
+    inputs:
+      testTarget:
+        description: 'Select the test class to run'
+        required: true
+        default: 'com.cicdtest.pom.Test.LoginTest'
+        type: choice
+        options:
+          - com.cicdtest.pom.Test.LoginTest
+          - com.cicdtest.pom.Test.AddProductTest
 
 jobs:
   build:
@@ -30,12 +39,12 @@ jobs:
       - name: Give permission to gradlew
         run: chmod +x ./gradlew
 
-      - name: Run Tests with Gradle
-        run: ./gradlew clean test
+      - name: Run Selected Test Class with Gradle
+        run: ./gradlew clean test --tests "${{ github.event.inputs.testTarget }}"
 
       - name: Upload Extent Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: extent-report
-          path: target/test-logs/extent-report.html  # Update if your report path is different
+          path: target/test-logs/extent-report.html  # Update if needed
